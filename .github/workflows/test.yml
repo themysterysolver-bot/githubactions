@@ -46,13 +46,29 @@ jobs:
 
       - name: Create placement.md file
         run: |
-          echo "$README_SECTION" > placement.md
+          echo "$README_SECTION" > README.md
+      
+      
+          
+      
 
       - name: Commit placement.md to repo
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add placement.md
-          git commit -m "Add placement.md from workflow"
+          git add README.md
+          git commit -m "Add README.md from workflow"
           git push
 
+      - name: get repo name
+        run: |
+          touch temp.md
+          dirs=$(ls)
+          for i in $dirs;
+          do 
+            echo "- [$i](https://github.com/themysterysolver-bot/githubactions/tree/main/$i)" >> temp.md
+          done 
+          
+          while read line; do
+            echo "$line"
+          done < temp.md
