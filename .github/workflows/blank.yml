@@ -1,6 +1,7 @@
 name: Directories and Repo Info
 
-on: [push]
+on: 
+  workflow_dispatch:
 
 jobs:
   explore:
