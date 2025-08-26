@@ -1,18 +1,12 @@
-name: Directories and Repo Info
+name: My Workflow
 
-on: 
-  workflow_dispatch:
+on: [push]
 
 jobs:
-  explore:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: List top-level directories
-        run: |
-          echo "Listing directories in repo root:"
-          ls -d */
-
-      - name: Echo GitHub repo name using variable
-        run: echo "This workflow is running for repo: ${{ github.repository }}"
+      - name: Checkout repository
+        uses: actions/checkout@v4 # Use the latest stable version
+      - name: List files
+        run: ls -l # Example: Verify the repository contents are present
