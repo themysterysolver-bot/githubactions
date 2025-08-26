@@ -13,17 +13,6 @@ jobs:
       - name: Checkout-repo
         uses: actions/checkout@v4
 
-      - name: get all folder name
-        run: |
-          ls
-          echo "woring?"
-          list=$(ls)
-          echo  "the directories are" 
-          for i in $list;
-          do 
-            echo "$i"
-          done
-          
       - name: Store README section
         run: |
           {
@@ -37,29 +26,7 @@ jobs:
             echo "EOF"
           } >> $GITHUB_ENV
 
-
-          
-
-      - name: retrieve and check
-        run: |
-          echo "$README_SECTION"
-
-      - name: Create placement.md file
-        run: |
-          echo "$README_SECTION" > README.md
-      
-      
-          
-
-      #- name: Commit placement.md to repo
-      #  run: |
-       #   git config --global user.name "github-actions[bot]"
-        #  git config --global user.email "github-actions[bot]@users.noreply.github.com"
-         # git add README.md
-          #git commit -m "Add README.md from workflow"
-          #git push
-
-      - name: get repo name
+      - name: Get repo directories
         run: |
           touch temp.md
           dirs=$(ls -d */ | sed 's#/##')
@@ -68,22 +35,22 @@ jobs:
             echo "- [$i](https://github.com/themysterysolver-bot/githubactions/tree/main/$i)" >> temp.md
           done 
           
-          while read line; do
-            echo "$line"
-          done < temp.md
-
           {
             echo "COMPANIES_LIST<<EOF"
             cat temp.md
             echo "EOF"
           } >> $GITHUB_ENV
 
-      - name: show companies
+      - name: Combine into README.md
         run: |
-          echo "$COMPANIES_LIST" > company.md
+          echo "$README_SECTION" > README.md
+          echo "$COMPANIES_LIST" >> README.md
+          cat README.md   # just to check content in logs
 
-          
-      
-      - name: display comapny name
+      - name: Commit README.md to repo
         run: |
-          echo "$COMAPNIES_LIST" >> company.md
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "Update README.md with companies list"
+          git push
