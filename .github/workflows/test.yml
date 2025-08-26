@@ -1,0 +1,14 @@
+name: tester
+on:
+  workflow_dispatch:
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout-repo
+        uses: actions/checkout@v3
+
+      - name: get all folder name
+        run:
+          echo $(ls -d */)
