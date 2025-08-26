@@ -13,3 +13,9 @@ jobs:
         run: |
           ls
           echo "woring?"
+          list=$(ls)
+          echo  "the directories are" 
+          for i in $list;
+          do 
+            echo "$i"
+          done
