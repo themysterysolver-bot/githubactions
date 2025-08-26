@@ -11,3 +11,4 @@
 - [AVAL](https://github.com/themysterysolver-bot/githubactions/tree/main/AVAL)
 - [Hello](https://github.com/themysterysolver-bot/githubactions/tree/main/Hello)
 - [NAN](https://github.com/themysterysolver-bot/githubactions/tree/main/NAN)
+- [PODU](https://github.com/themysterysolver-bot/githubactions/tree/main/PODU)
