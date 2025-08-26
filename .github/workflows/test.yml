@@ -63,7 +63,7 @@ jobs:
       - name: get repo name
         run: |
           touch temp.md
-          dirs=$(ls)
+          dirs=$(ls -d */ | sed 's#/##')
           for i in $dirs;
           do 
             echo "- [$i](https://github.com/themysterysolver-bot/githubactions/tree/main/$i)" >> temp.md
@@ -72,3 +72,9 @@ jobs:
           while read line; do
             echo "$line"
           done < temp.md
+
+          echo "COMPANIES_LIST=$(cat temp.md)" >> $GITHUB_ENV
+      
+      - name: display comapny name
+        run: |
+          echo "$COMAPNIES_LIST" >> company.md
