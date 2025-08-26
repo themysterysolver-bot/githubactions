@@ -10,5 +10,5 @@ jobs:
         uses: actions/checkout@v3
 
       - name: get all folder name
-        run:
+        run: |
           echo $(ls -d */)
