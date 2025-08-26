@@ -11,4 +11,4 @@ jobs:
 
       - name: get all folder name
         run: |
-          echo $(ls)
+          ls
