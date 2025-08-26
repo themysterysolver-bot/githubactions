@@ -22,15 +22,17 @@ jobs:
           
       - name: Store README section
         run: |
-          cat << 'EOF' >> $GITHUB_ENV
-          README_SECTION=### 📌 Placement Questions
-      
-          - Read the [`contributing.md`](./contributing.md) to learn how you can expand our community.  
-          - Explore the collection of valuable questions and information to help you get placed in your dream company.  
+          {
+            echo "README_SECTION<<EOF"
+            echo "### 📌 Placement Questions"
+            echo
+            echo "- Read the [\`contributing.md\`](./contributing.md) to learn how you can expand our community."
+            echo "- Explore the collection of valuable questions and information to help you get placed in your dream company."
+            echo 
+            echo "### COMPANIES"
+            echo "EOF"
+          } >> $GITHUB_ENV
 
-          ### COMPANIES
-          
-          EOF
 
           
 
