@@ -1,8 +1,8 @@
 name: tester
 on:
   push:        
-      branches:
-        - main
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout-repo
+      - name: Checkout repo
         uses: actions/checkout@v4
 
       - name: Store README section
@@ -33,8 +33,7 @@ jobs:
         run: |
           touch temp.md
           dirs=$(ls -d */ | sed 's#/##')
-          for i in $dirs;
-          do 
+          for i in $dirs; do 
             echo "- [$i](https://github.com/themysterysolver-bot/githubactions/tree/main/$i)" >> temp.md
           done 
           
@@ -50,10 +49,16 @@ jobs:
           echo "$COMPANIES_LIST" >> README.md
           cat README.md   # just to check content in logs
 
-      - name: Commit README.md to repo
+      - name: Commit README.md to repo (only if changed)
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add README.md
-          git commit -m "Update README.md with companies list"
-          git push
+
+          # Check for changes
+          if git diff --quiet README.md; then
+            echo "No changes in README.md, skipping commit."
+          else
+            git add README.md
+            git commit -m "Update README.md with companies list"
+            git push
+          fi
