@@ -50,7 +50,6 @@ jobs:
       
       
           
-      
 
       #- name: Commit placement.md to repo
       #  run: |
@@ -73,7 +72,17 @@ jobs:
             echo "$line"
           done < temp.md
 
-          echo "COMPANIES_LIST=$(cat temp.md)" >> $GITHUB_ENV
+          {
+            echo "COMPANIES_LIST<<EOF"
+            cat temp.md
+            echo "EOF"
+          } >> $GITHUB_ENV
+
+      - name: show companies
+        run: |
+          echo "$COMPANIES_LIST" > company.md
+
+          
       
       - name: display comapny name
         run: |
